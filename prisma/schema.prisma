@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model News {
+  id          Int       @id @default(autoincrement())
+  judul       String
+  deskripsi   String    @db.Text
+  image_url   String
+  link_berita String
+  created_at  DateTime?
+  created_by  String
+  news_type   Int       @default(1)
+}
+
+model Feedback {
+  id       Int      @id @default(autoincrement())
+  name     String
+  country  String
+  subject  String   @db.Text
+  rating   Int
+  entry_at DateTime @default(now())
+}
